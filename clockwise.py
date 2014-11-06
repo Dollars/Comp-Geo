@@ -1,6 +1,6 @@
 from __future__ import print_function
-import matplotlib
-matplotlib.use('Qt4Agg')
+# import matplotlib
+# matplotlib.use('Qt4Agg')
 import matplotlib.pyplot as plt
 from shapely.geometry import point
 from shapely.geometry import LineString
