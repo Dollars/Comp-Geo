@@ -12,6 +12,7 @@ L'ensemble des dépendances est dans le fichier requirements.txt.
 Procédure :
 
 ::
+
   virtualenv env
   source env/bin/activate
   pip install -r requirements.txt
@@ -24,4 +25,5 @@ Tout est installé dans le dossier lui même, il suffit donc de l'effacer pour t
 Procédure :
 
 ::
+
   rm -r Comp-Geo
