@@ -23,7 +23,7 @@ class Convex_polygon(Canvas):
                 if end_point != q:
                     break
             for j in range(1, len(points)):
-                if (end_point == start_point) or not self.is_clockwise(p[i], end_point, points[j]):
+                if (end_point == start_point) or not self.is_ccw(p[i], end_point, points[j]):
                     end_point = points[j]
             ++i
             start_point = end_point
@@ -44,7 +44,7 @@ class Convex_polygon(Canvas):
                 if end_point != q:
                     break
             for j in range(1, len(points)):
-                if (end_point == start_point) or not self.is_clockwise(p[i], end_point, points[j]):
+                if (end_point == start_point) or not self.is_ccw(p[i], end_point, points[j]):
                     end_point = points[j]
             ++i
             start_point = end_point
@@ -56,7 +56,7 @@ class Convex_polygon(Canvas):
         is_in = True
         for i in range(len(poly)):
             a, b = poly[i], poly[(i+1)%len(poly)]
-            is_in = not self.is_clockwise(a, b, point)
+            is_in = not self.is_ccw(a, b, point)
             if not is_in:
                 return False
         return True
@@ -66,9 +66,11 @@ class Convex_polygon(Canvas):
             a = poly[i-1]
             b = poly[i]
             c = poly[(i+1)%len(poly)]
-            is_tangent = (self.is_clockwise(point, b, a) == True and self.is_clockwise(point, b, c) == True)
-            if is_tangent:
-                return poly[i]
+            if (self.is_ccw(point, b, a) == True and self.is_ccw(point, b, c) == True):
+                t1 = poly[i]
+            elif (self.is_ccw(point, b, a) == False and self.is_ccw(point, b, c) == False):
+                t2 = poly[i]
+        return t1, t2
 
     def update_path(self, event):
 
@@ -76,6 +78,7 @@ class Convex_polygon(Canvas):
         if not event.inaxes or event.inaxes != self.ax: return
 
         self.ax.collections = []
+        self.ax.lines = [self.ax.lines[0]]
         # Do whichever action correspond to the mouse button clicked
         self.mouse_button[event.button]()
 
@@ -97,7 +100,8 @@ class Convex_polygon(Canvas):
                 is_in = self.is_in_polygon(p, s)
                 self.ax.scatter(self.x, self.y, color=COLOR[is_in])
                 if not is_in:
-                    a = self.find_tangent(p, s[1:])
+                    a, b = self.find_tangent(p, s[1:])
                     self.ax.plot([p.x, a.x], [p.y, a.y], 'o-', lw=3)
+                    self.ax.plot([p.x, b.x], [p.y, b.y], 'o-', lw=3)
 
         plt.draw()

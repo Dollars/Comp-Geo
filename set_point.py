@@ -39,7 +39,7 @@ class Point_set(Canvas):
                 next_point = True
                 for j in range(len(p)):
                     if j != i:
-                        next_point = not self.is_clockwise(start_point, p[i], p[j])
+                        next_point = not self.is_ccw(start_point, p[i], p[j])
                         if not next_point:
                             break
                 if next_point:

@@ -19,7 +19,7 @@ class Polygon(Canvas):
                 if end_point != q:
                     break
             for j in range(1, len(points)):
-                if (end_point == start_point) or not self.is_clockwise(p[i], end_point, points[j]):
+                if (end_point == start_point) or not self.is_ccw(p[i], end_point, points[j]):
                     end_point = points[j]
             ++i
             start_point = end_point
@@ -40,7 +40,7 @@ class Polygon(Canvas):
                 if end_point != q:
                     break
             for j in range(1, len(points)):
-                if (end_point == start_point) or not self.is_clockwise(p[i], end_point, points[j]):
+                if (end_point == start_point) or not self.is_ccw(p[i], end_point, points[j]):
                     end_point = points[j]
             ++i
             start_point = end_point

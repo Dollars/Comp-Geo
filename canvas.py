@@ -32,8 +32,11 @@ class Canvas(object):
         self.mouse_button = {1: self._add_point, 2: self._delete_point, 3: self._close_polygon}
         plt.draw()
 
-    def is_clockwise(self, a, b, c):
+    def is_ccw(self, a, b, c):
         return (b.y - a.y)*(c.x - a.x) < (b.x - a.x)*(c.y - a.y)
+
+    def is_cw(self, a, b, c):
+        return (b.y - a.y)*(c.x - a.x) > (b.x - a.x)*(c.y - a.y)
 
     def set_location(self, event):
         if event.inaxes == self.ax:
@@ -41,10 +44,10 @@ class Canvas(object):
             self.y = event.ydata
 
     def is_in_triangle(self, a, b, c, p):
-        sens = self.is_clockwise(a, b, c)
+        sens = self.is_ccw(a, b, c)
         tri = [a,b,c]
         for i in range(len(tri)):
-            if (sens != self.is_clockwise(tri[i], tri[(i+1)%len(tri)], p)):
+            if (sens != self.is_ccw(tri[i], tri[(i+1)%len(tri)], p)):
                 return False
         return True
 
