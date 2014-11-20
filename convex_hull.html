@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title>Comp-Geo Projects</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="thirdparty/foundation.css">
+    <script src="thirdparty/processing.min.js"></script>
+  </head>
+
+  <body>
+    <div class="row">
+      <header>
+        <div id="page-title" class="large-12 columns" class="row">
+          <h1>Computational Geometry</h1>
+        </div>
+      </header>
+
+      <div id="menu-bar" class="large-3 columns">
+        <ul class="side-nav">
+          <li>Interaction</li>
+          <li>
+            <dl class="sub-nav" style="margin-bottom: 0px; margin-left: 3px;">
+              <dt>Left click:</dt>
+              <dd>Add a point to the set</dd>
+            </dl>
+          </li>
+          <li class="divider"></li>
+        </ul>
+      </div>
+
+      <div id="right-panel" class="large-9 columns">
+        <div id="sketch" style="height: 602px; width: 712px; background-color: white;
+                      border: 1px #ddd solid; box-shadow: 0px 0px 3px #888;">
+            <canvas data-processing-sources="convex_hull.pde"></canvas>
+        </div>
+      </div>
+    
+      <div class="large-9 columns">
+        <h2>Explaination</h2>
+        <ol>
+          <li>Draw the convex hull of a given set of points.</li>
+        </ol>
+      </div>
+    </div>
+  </body>
+</html>
